@@ -1,5 +1,5 @@
 
-public class SprayResistantShower {
+public class SprayResistantShower extends Amenities{
 	protected Room unit; 
 	
 	public static final double COST = 25.00;

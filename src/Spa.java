@@ -1,5 +1,5 @@
 
-public class Spa {
+public class Spa extends Amenities{
 	protected Room unit; 
 	
 	public static final double COST = 20.00;

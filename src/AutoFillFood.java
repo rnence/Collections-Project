@@ -1,5 +1,5 @@
 
-public class AutoFillFood {
+public class AutoFillFood extends Amenities{
 	protected Room unit; 
 	
 	public static final double COST = 05.00;
