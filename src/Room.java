@@ -1,4 +1,5 @@
 // component room to be decorated with amenities
+// also the product the factory constructs
 public abstract class Room {
 	protected String description;
 	
