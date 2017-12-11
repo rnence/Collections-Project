@@ -5,11 +5,12 @@ public class Spa extends Amenities{
 	public static final double COST = 20.00;
 	
 	public Spa (Room unit) {
+		description = "Spa";
 		this.unit = unit;
 	}
 	
 	public String getDescription() {
-		return unit.getDescription() + " with a spa";
+		return unit.getDescription() + " + Spa";
 	}
 	
 	public double cost() {

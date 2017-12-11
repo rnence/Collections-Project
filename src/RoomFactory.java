@@ -1,16 +1,20 @@
 
-public class RoomFactory {
-	 
-	// something something amenities in an arraylist
-	
-	/**
-	  * Returns a Basic Room.
-	  */
-	 public Room createRoom(String type) {
-		 if (type.equals("Basic Room"))
-			 return new BasicRoom();
-		 else
-			 return null;
+public class RoomFactory{
+	 	
+	 public Room createRoom(String Amenities) {
+		 Room r = new BasicRoom();
+		 if(Amenities.contains("AutoFillFood")){
+			 r = new AutoFillFood(r);
+		 }
+		 if(Amenities.contains("FoodBar")){
+			 r = new FoodBar(r);
+		 }
+		 if(Amenities.contains("Spa")){
+			 r = new Spa(r);
+		 }
+		 if(Amenities.contains("SprayResistantShower")){
+			 r = new SprayResistantShower(r);
+		 }
+		 return r;
 	 }
-
 }

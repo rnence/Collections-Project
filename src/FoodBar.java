@@ -5,11 +5,12 @@ public class FoodBar extends Amenities {
 	public static final double COST = 10.00;
 	
 	public FoodBar (Room unit) {
+		description = "FoodBar";
 		this.unit = unit;
 	}
 	
 	public String getDescription() {
-		return unit.getDescription() + " with a food bar";
+		return unit.getDescription() + " + Food Bar";
 	}
 	
 	public double cost() {
