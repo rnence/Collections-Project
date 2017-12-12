@@ -1,25 +1,21 @@
+import java.util.ArrayList;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-public class Motel implements Map {
+public class Motel {
 
 	private static Motel instance;
-	private int maxCapacity;
-	private HashMap Rooms = new HashMap();
+	private RoomFactory factory = new RoomFactory();
+	private ArrayList<Room> rooms; // the rooms
+	private String vacancySign; // the vacancy sign
+	private Subject waitlist = new Subject(); // the waitlist
 	private int roomsOccupied;
-	private String vacancySign;
+	private int capacity;
 	
-	Motel(){
-		setCapacity(25);
-		
-		roomsOccupied = 0;
+	private Motel() {
+		rooms = new ArrayList<Room>();
 		vacancySign = "VACANCY";
-	};
+		capacity = 5;
+	}
 	
-	// declare the constructor as private which prevents object creation via new
 	public synchronized static Motel getInstance() {
 	     if (instance == null) {
 	       instance = new Motel();
@@ -27,13 +23,9 @@ public class Motel implements Map {
 	     }
 	     return instance;
 	}
-
-	public int getCapacity() {
-		return maxCapacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.maxCapacity = capacity;
+	
+	public int getCapacity() {		
+		return capacity;
 	}
 	
 	public String getVacancy() {		
@@ -41,96 +33,45 @@ public class Motel implements Map {
 	}
 
 	public void checkVacancy() {
-		if(roomsOccupied < maxCapacity) {
+		if(roomsOccupied < capacity) {
 			vacancySign = "VACANCY";
 		} else {
 			vacancySign = "NO VACANCY";
 		}
 	}
-	
-	public void checkIn( RoachColony roaches ) {
+
+	public void checkIn( RoachColony roaches, String amenities, int d ) {
+		checkVacancy();
 		if(vacancySign.equals("VACANCY")) {
 			roomsOccupied++;
+			Room newRoom;
+			newRoom = factory.createRoom(d, amenities);
+			
+			newRoom.setOccupants(roaches);
+			rooms.add(newRoom);
+			newRoom.setRoomNumber(rooms.indexOf(newRoom)+1);
+			roaches.assignRoom(newRoom);
+			System.out.println(roaches + " checked into " + newRoom.getDescription() + " for " + d + " days.");
 		} else {
-			//put on waitlist
+			System.out.println("Rooms are full.");
+			waitlist.attach(roaches);
+			System.out.println( roaches + " was put on the waitlist");
 		}	
 		
 	}
 	
+	public void checkOut( RoachColony rc ) {
+		double bill = rc.getRoom().cost() * rc.getRoom().days();
+		System.out.println(rc + " was charged $" + bill + " for their stay.");
+		rc.getRoom().clear();
+		roomsOccupied--;
+		waitlist.notifyAllObservers();
+	}
+	
 	@Override
 	public String toString() {
+		checkVacancy();
 		return "Roach Motel\n" + vacancySign;
 	}
 
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean containsKey(Object arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean containsValue(Object arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Set entrySet() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object get(Object arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Set keySet() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object put(Object arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void putAll(Map arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Object remove(Object arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Collection values() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

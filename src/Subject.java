@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// basically waitlist class
+// basically wait list class
 public class Subject {
 	
 	private List<Observer> observers = new ArrayList<Observer>();
