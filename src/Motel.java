@@ -101,5 +101,4 @@ public class Motel {
 		checkVacancy();
 		return "Roach Motel\n" + vacancySign;
 	}
-
 }
