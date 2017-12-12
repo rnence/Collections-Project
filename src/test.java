@@ -1,4 +1,9 @@
-
+/*	  Name:		Tri Nguyen & Mancia Pham & Julian Tran
+ *    Date: 	December 12-12-17
+ *    Purpose: 	To create a roach motel and allow for colonies to rent out a room with amenities. To demonstrate
+ *    			knowledge of design patterns of the Singleton, Factory, Decorator, and Observer
+ *    Output: 	The Roach Colonies cost of stay as well as amenities
+ */
 public class test {
 
 	public static void main(String[] args) {
@@ -33,11 +38,5 @@ public class test {
 		System.out.println(roach5);
 		roach5.throwParty();
 		roach5.gotSprayed();
-		
-		
-		
-	
-
 	}
-
 }
