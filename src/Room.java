@@ -6,23 +6,24 @@ public abstract class Room {
 	protected int days_stayed;
 	protected int room_number;
 	
-	// returns the description of the room
+	/** returns the description of the room*/
 	public String getDescription() {
 		return "Room " + room_number + ": " + description;
 	}
 	
-	// returns the cost of the room
+	/** returns the cost of the room*/
 	public abstract double cost();
 	
-	// returns the number of days stayed in room
+	/** returns the number of days stayed in room*/
 	public abstract int days();
 	
+	/** Sets the Room number */
 	public abstract void setRoomNumber(int rn);
 	
-	// puts the roaches into a room
+	/** puts the roaches into a room */
 	public abstract void setOccupants(RoachColony rc);
 
-	// clears the room
+	/** clears the room*/
 	public abstract void clear();
 
 }
